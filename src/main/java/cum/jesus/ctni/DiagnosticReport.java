@@ -16,6 +16,7 @@ public interface DiagnosticReport {
      * Never null.
      *
      * @return module handle the error happened at
+     * @since 1.0
      */
     Handle module();
 
@@ -24,6 +25,7 @@ public interface DiagnosticReport {
      * Never null
      *
      * @return function handle the error happened at
+     * @since 1.0
      */
     Handle function();
 
@@ -31,6 +33,7 @@ public interface DiagnosticReport {
      * Whether the error was causes by a native library, the vm itself or bytecode
      *
      * @return true if the error was caused by a native library or the vm, false otherwise
+     * @since 1.0
      */
     boolean causedByNative();
 
@@ -39,6 +42,7 @@ public interface DiagnosticReport {
      * The number is never negative.
      *
      * @return severity as a number
+     * @since 1.0
      */
     int severity();
 
@@ -47,6 +51,7 @@ public interface DiagnosticReport {
      * This is allowed to be null if it wasn't caused by a Throwable
      *
      * @return the {@link Throwable} which caused this error or null if it wasn't caused by a Throwable
+     * @since 1.0
      */
     Throwable cause();
 
@@ -55,6 +60,7 @@ public interface DiagnosticReport {
      * Is never null, but will simply be an empty string if there's no message.
      *
      * @return message for this error
+     * @since 1.0
      */
     String message();
 }

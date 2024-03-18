@@ -3,15 +3,24 @@ package cum.jesus.ctni;
 import java.util.Map;
 
 /**
- * Native library loader which is loaded and invoked at runtime. <br>
- * This is the interface for the main class of your library. <br><br>
+ * This interface is what you need at least 1 implementation of when creating a native library.
+ * This is necessary as it provides a main class for the vm library loader to call from when loading the library.
+ * <br><br>
+ * To use this for your library, you must put the "CT-Loader" entry in your jar manifest, with the value of your loader implementation class. <br>
+ * Example: "com.example.LoaderExample".
  *
- * The location of the main class implementing this has to be stored in the jar manifest under the field "CT-Entry"
+ * @author JesusTouchMe
+ * @since 1.0
  */
 public interface INativeLoader {
     /**
-     * Called by the vm library loader once it's ready to receive functions
-     * @param functionMap map of functions and their names
+     * This function is called once and only once by the library loader and is provided with the native function map.
+     * The map is a custom implementation of Map, which disallows getting and removing, meaning only put is allowed.
+     *
+     * @param functionMap the map of functions provided by the library loader
+     * @see NativeFunction
+     * @see Map
+     * @since 1.0
      */
     void injectMethods(Map<String, NativeFunction> functionMap);
 }

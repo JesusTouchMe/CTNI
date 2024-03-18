@@ -1,6 +1,7 @@
 package cum.jesus.ctni;
 
 import cum.jesus.ctni.exception.BadHandleException;
+import cum.jesus.ctni.exception.SecurityException;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface IEnvironment {
      * @param name the case-sensitive name of the module to find
      * @return the handle pointing to the module or null if no module with the given name is loaded
      * @see #GetModule()
+     * @since 1.0
      */
     Handle GetModule(String name);
 
@@ -33,6 +35,7 @@ public interface IEnvironment {
      *
      * @return the handle pointing to the module which is never null
      * @see #GetModule(String)
+     * @since 1.0
      */
     Handle GetModule();
 
@@ -44,6 +47,7 @@ public interface IEnvironment {
      * @see DiagnosticReport
      * @see #GetLatestError()
      * @see #GetAllErrors()
+     * @since 1.0
      */
     DiagnosticReport PreviewLatestError();
 
@@ -52,6 +56,7 @@ public interface IEnvironment {
      * This can return null if there's no errors present in the vm at the time of calling.
      *
      * @return the latest error or null if none are present
+     * @since 1.0
      */
     DiagnosticReport GetLatestError();
 
@@ -60,6 +65,7 @@ public interface IEnvironment {
      * This will never return null, instead it returns a {@code new DiagnosticReport[0]} if no errors are present.
      *
      * @return Always an array containing all the errors from the vm (even if there's 0)
+     * @since 1.0
      */
     DiagnosticReport[] GetAllErrors();
 
@@ -75,6 +81,7 @@ public interface IEnvironment {
      * @see #GetModule()
      * @see #GetFunction(String)
      * @see #CallHandleFunction(Handle, Object...)
+     * @since 1.0
      */
     Handle GetFunction(Handle module, String name) throws BadHandleException;
 
@@ -87,6 +94,7 @@ public interface IEnvironment {
      * @see #GetModule()
      * @see #GetFunction(Handle, String)
      * @see #CallHandleFunction(Handle, Object...)
+     * @since 1.0
      */
     Handle GetFunction(String name);
 
@@ -100,6 +108,7 @@ public interface IEnvironment {
      * @see #GetFunction(String) 
      * @see #CallVoidFunctionA(Handle, Object[]) 
      * @see #CallVoidFunctionL(Handle, List)
+     * @since 1.0
      */
     void CallVoidFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -113,6 +122,7 @@ public interface IEnvironment {
      * @see #GetFunction(String)
      * @see #CallVoidFunction(Handle, Object...)
      * @see #CallVoidFunctionL(Handle, List)
+     * @since 1.0
      */
     void CallVoidFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -126,8 +136,9 @@ public interface IEnvironment {
      * @see #GetFunction(String)
      * @see #CallVoidFunction(Handle, Object...)
      * @see #CallVoidFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    void CallVoidFunctionL(Handle function, List<?> args) throws BadHandleException;
+    void CallVoidFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and attempt to wrap the returned value as a Java byte or default to 0 if wrapping was not possible,
@@ -143,6 +154,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallByteFunctionA(Handle, Object[])
      * @see #CallByteFunctionL(Handle, List)
+     * @since 1.0
      */
     byte CallByteFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -160,6 +172,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallByteFunction(Handle, Object...)
      * @see #CallByteFunctionL(Handle, List)
+     * @since 1.0
      */
     byte CallByteFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -177,8 +190,9 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallByteFunction(Handle, Object...)
      * @see #CallByteFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    byte CallByteFunctionL(Handle function, List<?> args) throws BadHandleException;
+    byte CallByteFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and attempt to wrap the returned value as a Java short or default to 0 if wrapping was not possible,
@@ -194,6 +208,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallShortFunctionA(Handle, Object[])
      * @see #CallShortFunctionL(Handle, List)
+     * @since 1.0
      */
     short CallShortFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -211,6 +226,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallShortFunction(Handle, Object...)
      * @see #CallShortFunctionL(Handle, List)
+     * @since 1.0
      */
     short CallShortFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -228,8 +244,9 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallShortFunction(Handle, Object...)
      * @see #CallShortFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    short CallShortFunctionL(Handle function, List<?> args) throws BadHandleException;
+    short CallShortFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and attempt to wrap the returned value as a Java int or default to 0 if wrapping was not possible,
@@ -245,6 +262,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallIntFunctionA(Handle, Object[])
      * @see #CallIntFunctionL(Handle, List)
+     * @since 1.0
      */
     int CallIntFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -262,6 +280,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallIntFunction(Handle, Object...)
      * @see #CallIntFunctionL(Handle, List)
+     * @since 1.0
      */
     int CallIntFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -279,8 +298,9 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallIntFunction(Handle, Object...)
      * @see #CallIntFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    int CallIntFunctionL(Handle function, List<?> args) throws BadHandleException;
+    int CallIntFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and attempt to wrap the returned value as a Java long or default to 0 if wrapping was not possible,
@@ -296,6 +316,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallLongFunctionA(Handle, Object[])
      * @see #CallLongFunctionL(Handle, List)
+     * @since 1.0
      */
     long CallLongFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -313,6 +334,7 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallLongFunction(Handle, Object...)
      * @see #CallLongFunctionL(Handle, List)
+     * @since 1.0
      */
     long CallLongFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -330,8 +352,9 @@ public interface IEnvironment {
      * @see #PreviewLatestError()
      * @see #CallLongFunction(Handle, Object...)
      * @see #CallLongFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    long CallLongFunctionL(Handle function, List<?> args) throws BadHandleException;
+    long CallLongFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and attempt to wrap the returned value as a Java String or default to null if wrapping was not possible,
@@ -345,8 +368,9 @@ public interface IEnvironment {
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
-     * @see #CallLongFunctionA(Handle, Object[])
-     * @see #CallLongFunctionL(Handle, List)
+     * @see #CallStringFunctionA(Handle, Object[])
+     * @see #CallStringFunctionL(Handle, List)
+     * @since 1.0
      */
     String CallStringFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -362,8 +386,9 @@ public interface IEnvironment {
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
-     * @see #CallLongFunction(Handle, Object...)
-     * @see #CallLongFunctionL(Handle, List)
+     * @see #CallStringFunction(Handle, Object...)
+     * @see #CallStringFunctionL(Handle, List)
+     * @since 1.0
      */
     String CallStringFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -379,10 +404,11 @@ public interface IEnvironment {
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
-     * @see #CallLongFunctionA(Handle, Object[])
-     * @see #CallLongFunctionL(Handle, List)
+     * @see #CallStringFunctionA(Handle, Object[])
+     * @see #CallStringFunctionL(Handle, List)
+     * @since 1.0
      */
-    String CallStringFunctionL(Handle function, List<?> args) throws BadHandleException;
+    String CallStringFunctionL(Handle function, List<Object> args) throws BadHandleException;
 
     /**
      * Will call a function pointed to by the given handle and return a handle to a clone of the returned value.
@@ -390,13 +416,14 @@ public interface IEnvironment {
      *
      * @param function handle to the function that should be called
      * @param args varargs of Java type values that the vm should pass to the function
-     * @return the return value of the called function wrapped as a Java String
+     * @return cloned handle of the function return value
      * @throws BadHandleException if the function handle is either null or doesn't point to a valid function
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
      * @see #CallHandleFunctionA(Handle, Object[])
      * @see #CallHandleFunctionL(Handle, List)
+     * @since 1.0
      */
     Handle CallHandleFunction(Handle function, Object... args) throws BadHandleException;
 
@@ -406,13 +433,14 @@ public interface IEnvironment {
      *
      * @param function handle to the function that should be called
      * @param args array of Java type values that the vm should pass to the function
-     * @return the return value of the called function wrapped as a Java String
+     * @return cloned handle of the function return value
      * @throws BadHandleException if the function handle is either null or doesn't point to a valid function
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
      * @see #CallHandleFunction(Handle, Object...)
      * @see #CallHandleFunctionL(Handle, List)
+     * @since 1.0
      */
     Handle CallHandleFunctionA(Handle function, Object[] args) throws BadHandleException;
 
@@ -422,15 +450,111 @@ public interface IEnvironment {
      *
      * @param function handle to the function that should be called
      * @param args varargs of Java type values that the vm should pass to the function
-     * @return the return value of the called function wrapped as a Java String
+     * @return cloned handle of the function return value
      * @throws BadHandleException if the function handle is either null or doesn't point to a valid function
      * @see #GetFunction(String)
      * @see #GetLatestError()
      * @see #PreviewLatestError()
      * @see #CallHandleFunction(Handle, Object...)
      * @see #CallHandleFunctionA(Handle, Object[])
+     * @since 1.0
      */
-    Handle CallHandleFunctionL(Handle function, List<?> args) throws BadHandleException;
+    Handle CallHandleFunctionL(Handle function, List<Object> args) throws BadHandleException;
+
+    /**
+     * Acts as if the int instruction of bytecode was used, passing the bytes and arguments.
+     * In cases where the int call has no return, the returned handle may be garbage.
+     *
+     * @param id id of the interrupt call
+     * @param byte1 int id byte1 byte2 byte3
+     * @param byte2 int id byte1 byte2 byte3
+     * @param byte3 int id byte1 byte2 byte3
+     * @param args varargs of Java type values that the vm will wrap to ct and pass to the call
+     * @return cloned handle of the function return value
+     * @since 1.0
+     */
+    Handle CallInterruptFunction(int id, byte byte1, byte byte2, byte byte3, Object... args);
+
+    /**
+     * Performs a check on a handle to see if it points to a byte.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid byte, false otherwise
+     * @see #GetByteFromHandle(Handle, boolean)
+     * @since 1.0
+     */
+    boolean IsByte(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to a short.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid short, false otherwise
+     * @see #GetShortFromHandle(Handle, boolean)
+     * @since 1.0
+     */
+    boolean IsShort(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to an int.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid int, false otherwise
+     * @see #GetIntFromHandle(Handle, boolean)
+     * @since 1.0
+     */
+    boolean IsInt(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to a long.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid long, false otherwise
+     * @see #GetLongFromHandle(Handle, boolean)
+     * @since 1.0
+     */
+    boolean IsLong(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to any number.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid number, false otherwise
+     * @see #GetByteFromHandle(Handle, boolean)
+     * @see #GetShortFromHandle(Handle, boolean)
+     * @see #GetIntFromHandle(Handle, boolean)
+     * @see #GetLongFromHandle(Handle, boolean)
+     * @since 1.0
+     */
+    boolean IsNumber(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to a string.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid string, false otherwise
+     * @see #GetStringFromHandle(Handle)
+     * @since 1.0
+     */
+    boolean IsString(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to a module.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid module, false otherwise
+     * @since 1.0
+     */
+    boolean IsModule(Handle handle);
+
+    /**
+     * Performs a check on a handle to see if it points to a function.
+     *
+     * @param handle handle to check
+     * @return true if the handle points to a valid function, false otherwise
+     * @since 1.0
+     */
+    boolean IsFunction(Handle handle);
 
     /**
      * Retrieves a byte from a handle which may point to a byte.
@@ -439,6 +563,7 @@ public interface IEnvironment {
      * @param strictType if this is true, the handle HAS to point to a valid byte and only a byte, if not then any number will work
      * @return retrieved byte
      * @throws BadHandleException if the handle doesn't point to a valid number or if strict typing is on, this is thrown if it isn't a byte
+     * @since 1.0
      */
     byte GetByteFromHandle(Handle handle, boolean strictType) throws BadHandleException;
 
@@ -449,6 +574,7 @@ public interface IEnvironment {
      * @param strictType if this is true, the handle HAS to point to a valid short and only a short, if not then any number will work
      * @return retrieved short
      * @throws BadHandleException if the handle doesn't point to a valid number or if strict typing is on, this is thrown if it isn't a short
+     * @since 1.0
      */
     short GetShortFromHandle(Handle handle, boolean strictType) throws BadHandleException;
 
@@ -459,6 +585,7 @@ public interface IEnvironment {
      * @param strictType if this is true, the handle HAS to point to a valid int and only an int, if not then any number will work
      * @return retrieved int
      * @throws BadHandleException if the handle doesn't point to a valid number or if strict typing is on, this is thrown if it isn't an int
+     * @since 1.0
      */
     int GetIntFromHandle(Handle handle, boolean strictType) throws BadHandleException;
 
@@ -469,6 +596,7 @@ public interface IEnvironment {
      * @param strictType if this is true, the handle HAS to point to a valid long and only a long, if not then any number will work
      * @return retrieved long
      * @throws BadHandleException if the handle doesn't point to a valid number or if strict typing is on, this is thrown if it isn't a long
+     * @since 1.0
      */
     long GetLongFromHandle(Handle handle, boolean strictType) throws BadHandleException;
 
@@ -478,6 +606,7 @@ public interface IEnvironment {
      * @param handle the handle to retrieve the string from
      * @return retrieved string
      * @throws BadHandleException if the handle doesn't point to a valid string
+     * @since 1.0
      */
     String GetStringFromHandle(Handle handle) throws BadHandleException;
 
@@ -486,6 +615,7 @@ public interface IEnvironment {
      *
      * @param b java byte to construct with
      * @return handle to the newly created byte
+     * @since 1.0
      */
     Handle NewByte(byte b);
 
@@ -494,6 +624,7 @@ public interface IEnvironment {
      *
      * @param s java short to construct with
      * @return handle to the newly created short
+     * @since 1.0
      */
     Handle NewShort(short s);
 
@@ -502,6 +633,7 @@ public interface IEnvironment {
      *
      * @param i java int to construct with
      * @return handle to the newly created int
+     * @since 1.0
      */
     Handle NewInt(int i);
 
@@ -510,6 +642,7 @@ public interface IEnvironment {
      *
      * @param l java long to construct with
      * @return handle to the newly created long
+     * @since 1.0
      */
     Handle NewLong(long l);
 
@@ -518,6 +651,64 @@ public interface IEnvironment {
      *
      * @param jString the java string to construct the ct string with
      * @return handle to newly constructed ct string
+     * @since 1.0
      */
     Handle NewString(String jString);
+
+    /**
+     * Allocates an amount of values on the heap and returns a handle to this allocation.
+     *
+     * @param size the amount of values to allocate
+     * @return handle to the new allocation or null if out of memory or other error
+     * @since 1.0
+     */
+    Handle Alloc(int size);
+
+    /**
+     * Will change the size of an allocation on the heap and returns the handle to the new allocation.
+     * The old elements will remain unless it's being sized down. <br>
+     * If the handle is null, creates a new allocation, if the new size is 0, frees an allocation. <br>
+     * Will report an error if the handle doesn't point to a heap allocation.
+     *
+     * @param handle handle to the old allocation, must be allocated on heap
+     * @param newSize new size of the allocations
+     * @return handle to the newly resized allocation, can be the passed handle
+     * @see #Alloc(int)
+     * @since 1.0
+     */
+    Handle ReAlloc(Handle handle, int newSize);
+
+    /**
+     * Frees an allocation on the heap and deletes all values associated with it.
+     * Will report an error if handle isn't a valid heap allocation.
+     *
+     * @param handle handle to the allocation, must be allocated on heap
+     * @see #GetLatestError()
+     * @since 1.0
+     */
+    void Free(Handle handle);
+
+    /**
+     * Attempts to read the value stored at a handle (preferably a heap allocation) at an offset.
+     *
+     * @param ptr handle to heap allocation
+     * @param offset the offset to read at
+     * @return the value stored at ptr[offset] (pseudocode)
+     * @throws BadHandleException if the provided ptr handle is null or doesn't point to a memory allocation
+     * @throws SecurityException if a read-protected memory location is attempted to be read
+     * @since 1.0
+     */
+    Handle Read(Handle ptr, int offset) throws BadHandleException, SecurityException;
+
+    /**
+     * Attempts to write a given value in memory (preferably a heap allocation) at a specified offset.
+     *
+     * @param ptr handle to heap allocation
+     * @param offset the offset at ptr to write to
+     * @param value the value to write at ptr[offset] (pseudocode)
+     * @throws BadHandleException If the provided ptr handle is null or doesn't point to a memory location
+     * @throws SecurityException if a write-protected memory location is attempted to write to
+     * @since 1.0
+     */
+    void Write(Handle ptr, int offset, Handle value) throws BadHandleException, SecurityException;
 }

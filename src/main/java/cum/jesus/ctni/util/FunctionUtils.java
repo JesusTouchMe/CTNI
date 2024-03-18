@@ -2,12 +2,19 @@ package cum.jesus.ctni.util;
 
 import cum.jesus.ctni.Handle;
 import cum.jesus.ctni.IEnvironment;
+import cum.jesus.ctni.NativeFunction;
 import cum.jesus.ctni.exception.BadHandleException;
 
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
- * Utility class for simplifying functions from the vm
+ * Utility class to make both native and bytecode functions easier to call or create.
+ *
+ * @author JesusTouchMe
+ * @see IEnvironment
+ * @since 1.0
  */
 public final class FunctionUtils {
     /**
@@ -15,6 +22,8 @@ public final class FunctionUtils {
      * @param env environment to find function
      * @param name name of the function
      * @return the wrapped function
+     * @see IEnvironment
+     * @since 1.0
      */
     public static Function getFunction(IEnvironment env, String name) {
         Handle func = env.GetFunction(name);
@@ -22,7 +31,33 @@ public final class FunctionUtils {
     }
 
     /**
+     * Constructs a new {@link NativeFunction} using the provided parameters.
+     *
+     * @param argc amount of args the function requires
+     * @param function the function which will be called by the native function
+     * @return the newly made native function
+     * @see NativeFunction
+     * @since 1.0
+     */
+    public static NativeFunction createNative(int argc, BiFunction<IEnvironment, Object[], Handle> function) {
+        return new NativeFunction() {
+            @Override
+            public int argc() {
+                return argc;
+            }
+
+            @Override
+            public Handle call(IEnvironment env, Object... args) {
+                return function.apply(env, args);
+            }
+        };
+    }
+
+    /**
      * Wrapper class for a function in the CTVM
+     *
+     * @author JesusTouchMe
+     * @since 1.0
      */
     public static final class Function {
         private IEnvironment env;
@@ -56,7 +91,7 @@ public final class FunctionUtils {
          * @param args any iterable List of java type values
          * @throws BadHandleException if the function contains a bad handle
          */
-        public void callL(List<?> args) throws BadHandleException {
+        public void callL(List<Object> args) throws BadHandleException {
             env.CallVoidFunctionL(functionHandle, args);
         }
     }

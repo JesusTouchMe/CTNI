@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'cum.jesus.ctni'
@@ -12,5 +13,16 @@ repositories {
 dependencies {
 }
 
-test {
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("file://C:/lib/ctni")
+        }
+    }
 }
